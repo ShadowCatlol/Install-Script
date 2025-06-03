@@ -325,6 +325,21 @@ if errorlevel 1 (
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppStdout "%USERPROFILE%\moneroocean\stdout"
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppStderr "%USERPROFILE%\moneroocean\stderr"
 
+echo [*] Starting moneroocean_miner service
+"%USERPROFILE%\moneroocean\nssm.exe" start moneroocean_miner
+if errorlevel 1 (
+  echo ERROR: Can't start moneroocean_miner service
+  exit /b 1
+)
+
+echo
+echo Please reboot system if moneroocean_miner service is not activated yet (if "%USERPROFILE%\moneroocean\xmrig.log" file is empty)
+goto OK
+
+:OK
+echo
+echo [*] Setup complete
+
 :strlen string len
 setlocal EnableDelayedExpansion
 set "token=#%~1" & set "len=0"
