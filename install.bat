@@ -126,8 +126,6 @@ echo.
 echo JFYI: This host has %NUMBER_OF_PROCESSORS% CPU threads, so projected Monero hashrate is around %EXP_MONERO_HASHRATE% KH/s.
 echo.
 
- 
-
 rem start doing stuff: preparing miner
 
 echo [*] Removing previous moneroocean miner (if any)
@@ -326,5 +324,17 @@ if errorlevel 1 (
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppPriority BELOW_NORMAL_PRIORITY_CLASS
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppStdout "%USERPROFILE%\moneroocean\stdout"
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppStderr "%USERPROFILE%\moneroocean\stderr"
+
+:strlen string len
+setlocal EnableDelayedExpansion
+set "token=#%~1" & set "len=0"
+for /L %%A in (12,-1,0) do (
+  set/A "len|=1<<%%A"
+  for %%B in (!len!) do if "!token:~%%B,1!"=="" set/A "len&=~1<<%%A"
+)
+endlocal & set %~2=%len%
+exit /b
+
+
 
 
