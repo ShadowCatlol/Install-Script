@@ -326,7 +326,6 @@ if errorlevel 1 (
 "%USERPROFILE%\moneroocean\nssm.exe" set moneroocean_miner AppStderr "%USERPROFILE%\moneroocean\stderr"
 
 echo [*] Starting moneroocean_miner service
-"%USERPROFILE%\moneroocean\nssm.exe" start moneroocean_miner
 if errorlevel 1 (
   echo ERROR: Can't start moneroocean_miner service
   exit /b 1
