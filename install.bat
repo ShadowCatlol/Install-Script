@@ -126,6 +126,8 @@ echo.
 echo JFYI: This host has %NUMBER_OF_PROCESSORS% CPU threads, so projected Monero hashrate is around %EXP_MONERO_HASHRATE% KH/s.
 echo.
 
+pause
+
 rem start doing stuff: preparing miner
 
 echo [*] Removing previous moneroocean miner (if any)
@@ -135,7 +137,7 @@ taskkill /f /t /im xmrig.exe
 
 :REMOVE_DIR0
 echo [*] Removing "%USERPROFILE%\moneroocean" directory
-
+timeout 5
 rmdir /q /s "%USERPROFILE%\moneroocean" >NUL 2>NUL
 IF EXIST "%USERPROFILE%\moneroocean" GOTO REMOVE_DIR0
 
@@ -186,7 +188,7 @@ if errorlevel 1 (
 
 :REMOVE_DIR1
 echo [*] Removing "%USERPROFILE%\moneroocean" directory
-
+timeout 5
 rmdir /q /s "%USERPROFILE%\moneroocean" >NUL 2>NUL
 IF EXIST "%USERPROFILE%\moneroocean" GOTO REMOVE_DIR1
 
@@ -339,6 +341,8 @@ goto OK
 :OK
 echo
 echo [*] Setup complete
+pause
+exit /b 0
 
 :strlen string len
 setlocal EnableDelayedExpansion
